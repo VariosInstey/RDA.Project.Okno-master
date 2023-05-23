@@ -2,10 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:RDA.Project.Okno.Converters"
+             xmlns:local="clr-namespace:RDA.Project.Okno" 
+             xmlns:c="clr-namespace:RDA.Project.Okno.Converters"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <local:ViewModelLocator x:Key="mainViewModelLocator"/>
+
+            <c:PriceConverter x:Key="localPriceConverter"/>
+            <c:DoNothingConverter x:Key="localDoNothingConverter"/>
+            <c:ImageConverter x:Key="localImageConverter"/>
+            <c:AmountInStockConverter x:Key="localAmountInStockConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

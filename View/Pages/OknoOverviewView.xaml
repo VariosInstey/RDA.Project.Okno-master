@@ -1,0 +1,203 @@
+﻿<Window x:Class="RDA.Project.Okno.View.Pages.OknoOverviewView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RDA.Project.Okno.View.Pages"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:viewmodel="clr-namespace:RDA.Project.Okno.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:OknoDetailViewModel}"
+        WindowStyle="None"
+        DataContext="{Binding Source={StaticResource mainViewModelLocator}, Path=OknoOverviewViewModel}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        FontFamily="Consolas"
+        mc:Ignorable="d"
+        Title="OknoOverviewView" 
+        Height="600" 
+        Width="840">
+    <Grid Background="#808080">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#696969"
+                CornerRadius="5"
+                Height="50"
+                Width="370"
+                MouseDown="Border_MouseDown"
+                Effect="{StaticResource MaterialDesignElevationShadow16}">
+            <TextBlock Text="Разработка ПМ - Рыжиков Дмитрий"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       VerticalAlignment="Center"
+                       TextAlignment="Center"/>
+        </Border>
+        <StackPanel HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="5">
+            <Button Background="#696969"
+                    BorderBrush="#696969"
+                    Click="Button_Click"
+                    Effect="{StaticResource MaterialDesignElevationShadow16}">
+                <materialDesign:PackIcon Kind="Close"
+                                         Foreground="White"/>
+            </Button>
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Column="0">
+                <ListView
+                    Margin="5"
+                    Name="OknoListView"
+                    ItemsSource="{Binding Oknos}"
+                    SelectedItem="{Binding SelectedOkno}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#696969"
+                                    CornerRadius="5"
+                                    Margin="0 10 0 10"
+                                    Effect="{StaticResource MaterialDesignElevationShadow24}">
+                                <Grid Background="{Binding AmountInStock, Converter={StaticResource localAmountInStockConverter}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="15"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding ImageId,
+                                        Converter={StaticResource localImageConverter}}"
+                                           Grid.RowSpan="2"
+                                           VerticalAlignment="Center"
+                                           Margin="5"/>
+                                    <Label Content="{Binding OknoName}"
+                                           FontSize="14"
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="2"
+                                           FontWeight="Bold"
+                                           Foreground="White"/>
+                                    <StackPanel Grid.Row="1"
+                                                Orientation="Horizontal"
+                                                Grid.Column="1">
+                                        <Label Content="На складе: "
+                                               Foreground="White"/>
+                                        <Label Content="{Binding AmountInStock}"
+                                               Foreground="White"/>
+                                    </StackPanel>
+                                    <Label Content="{Binding Price, Converter={StaticResource localPriceConverter}}"
+                                           HorizontalAlignment="Right"
+                                           Grid.Row="1"
+                                           Grid.Column="2"
+                                           Foreground="White"/>
+                                </Grid>
+                                
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{Binding SelectedOkno.ImageId,
+                        Converter={StaticResource localImageConverter},
+                        Mode=OneWay}"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           MaxHeight="150"
+                           MaxWidth="150"
+                           Effect="{StaticResource MaterialDesignElevationShadow16}"
+                           Margin="10"/>
+
+                    <Label Grid.Row="1"
+                           Content="№: "
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                    <Label Grid.Row="2"
+                           Content="Название окна: "
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                    <Label Grid.Row="3"
+                           Content="Описание "
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                    <Label Grid.Row="4"
+                           Content="Цена: "
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                    <Label Grid.Row="5"
+                           Content="Количество: "
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                    <Label Grid.Row="6"
+                           Content="Поступление: "
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Content="{Binding SelectedOkno.OknaId, Mode=OneWay}"
+                           Foreground="White"/>
+                    <Label Grid.Row="2"
+                           Grid.Column="1"
+                           Content="{Binding SelectedOkno.OknaName,
+                        Mode=OneWay}"
+                           Foreground="White"/>
+                    <TextBox Grid.Row="3"
+                           Grid.Column="1"
+                           Text="{Binding SelectedOkno.Description, Mode=OneWay}"
+                             TextWrapping="Wrap"
+                             Width="260"
+                             IsReadOnly="True"
+                             Foreground="White"
+                             BorderBrush="#696969"/>
+                    <TextBox Grid.Row="4"
+                           Grid.Column="1"
+                           Text="{Binding SelectedOkno.Price, Mode=OneWay}"
+                             Foreground="White"/>
+                    <TextBox Grid.Row="5"
+                           Grid.Column="1"
+                           Text="{Binding SelectedOkno.AmountInStock, Mode=OneWay}"
+                             Foreground="White"/>
+                    <TextBox Grid.Row="6"
+                           Grid.Column="1"
+                           Text="{Binding SelectedOkno.FirstAddedToStockDate, Mode=OneWay}"
+                             Foreground="White"/>
+                    <StackPanel Grid.Row="7">
+                        <Button Margin="5"
+                                Command="{Binding EditCommand}"
+                        Content="Редактировать"
+                        Foreground="White"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Background="#696969"
+                                BorderBrush="#696969"/>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

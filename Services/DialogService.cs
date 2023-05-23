@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RDA.Project.Okno.View.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace RDA.Project.Okno.Services
         public DialogService() { }
         public void ShowDetailDialog()
         {
-            oknoDetailView = new MainWindow();
+            oknoDetailView = new OknoWindow();
             oknoDetailView.ShowDialog();    
         }
         public void CloseDetailDialog()
